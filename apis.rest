@@ -1,0 +1,6 @@
+### create users
+POST localhost:8080/apis/rest/users
+{
+  "username": "user1",
+  "password": "password1"
+}
