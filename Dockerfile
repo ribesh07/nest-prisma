@@ -12,10 +12,9 @@ RUN rm -rf node_modules && npm install --legacy-peer-deps
 
 # Copy the rest of the project
 COPY . .
+RUN npm run build
 
 # Expose port if needed
 EXPOSE 3000
 
-
-# Start command
-CMD ["npm", "run", "start:prod"]
+CMD ["node", "dist/main.js"]
