@@ -12,6 +12,12 @@ RUN rm -rf node_modules && npm install --legacy-peer-deps
 
 # Copy the rest of the project
 COPY . .
+# Generate Prisma client
+RUN npx prisma generate
+
+# Run Prisma migrations (optional: only in production or at build time)
+RUN npx prisma migrate deploy
+
 RUN npm run build
 
 # Expose port if needed
