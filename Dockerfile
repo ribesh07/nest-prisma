@@ -4,18 +4,18 @@ FROM node:18-alpine
 # Set working directory
 WORKDIR /src
 
-# Copy package files and install dependencies
+# Copy package files first (for caching)
 COPY package*.json ./
-RUN npm install
 
-# Copy rest of the code
+# Ensure clean install
+RUN rm -rf node_modules && npm install --legacy-peer-deps
+
+# Copy the rest of the project
 COPY . .
 
-# Build NestJS app
-RUN npm run build
-
-# Expose app port
+# Expose port if needed
 EXPOSE 3000
+
 
 # Start command
 CMD ["npm", "run", "start:prod"]
